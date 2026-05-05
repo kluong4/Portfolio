@@ -39,15 +39,17 @@ MBD6-ASD-transcriptomics/
 │
 ├── README.md
 │
-├── scripts/
-│   ├── 01_EDA.R           # Data loading, normalization, QC plots
-│   ├── 02_DE_analysis.R    # DEG analysis, volcano plot, heatmap
-│   ├── 03_GO_analysis.R    # GO enrichment + visualizations
+├── Scripts/
+│   ├── 01_EDA.R                  # Data loading, normalization, QC plots
+│   ├── 02_DE_analysis.R          # DEG analysis, volcano plot, heatmap
+│   ├── 03_GO_analysis.R          # GO enrichment + visualizations
 │   └── 04_eQTL_GWAS_analysis.R   # GTEx eQTL x ASD GWAS overlap
 │
-├── results/
-│   ├── figures/                     # All output plots (.png)
-│   └── tables/                      # All output tables (.csv)
+├── Results/
+│   ├── Figures/                   # All output plots (.png)
+│   └── Tables/                    # All output tables (.csv)
+│
+├── MBD6_ASD_Report.pdf            # Full Report (.pdf)
 │
 └── 
 ```
