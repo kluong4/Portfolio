@@ -89,7 +89,7 @@ install.packages("ggnewscale")
 | Microarray expression data | GEO: GSE314093 | [Link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314093) |
 | Platform annotation | GEO: GPL13497 | [Link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL13497) |
 | GTEx v11 Brain Cortex eQTLs | GTEx Portal | [Link](https://gtexportal.org/home/downloads/adult-gtex/qtl) |
-| ASD GWAS associations | GWAS Catalog (EFO_0003756) | [Link](https://www.ebi.ac.uk/gwas/efotraits/EFO_0003756) |
+| ASD GWAS associations | GWAS Catalog (MONDO_0005258) | [Link](https://www.ebi.ac.uk/gwas/efotraits/MONDO_0005258) |
 
 ---
 
