@@ -90,16 +90,20 @@ chronic-disease-analysis/
 │
 ├── README.md
 │
-├── data/
+├── Data/
 │   ├── chronic-disease-data.csv
 │   └── CC_R20_20200630_Data_Dectionary_MCC.pdf
 │
-├── results/
-│   ├── Fig1_prevalence_heatmap.png
-│   ├── Fig2_utilization_barcharts.png
-│   └── Fig3_statewise_diverging_bars.png
+├── Results/
+│   ├── Fig1_FacetedHeatmap_Race-Age.png
+│   ├── Fig2_BarChart_UtilizationMetrics.png
+│   ├── Fig3_DivergingBarChart_Gender.png
+│   └── Fig4_DivergingBarChart_Race.png
 │
-└── Chronic_Disease_Analysis.ipynb
+├── Jupyter Notebook/
+│   └── Chronic_Disease_Analysis.ipynb
+│
+└── 
 ```
 
 ---
