@@ -3,13 +3,23 @@
 ## Overview
 This project investigates the genome-wide transcriptional consequences of MBD6 haploinsufficiency in a neuronal model of Autism Spectrum Disorder (ASD). Using publicly available Agilent microarray data from MBD6-heterozygous SH-SY5Y human neuroblastoma cells, we identified 913 differentially expressed genes and linked them to ASD-associated genetic variants through eQTL-GWAS integration.
 
+**Presentation** [Link](https://youtu.be/P_522uJcFiM)
+
 ---
 
 ## Background
 MBD6 (Methyl-CpG Binding Domain Protein 6) is a chromatin regulator implicated in ASD through rare copy number variants and de novo mutations. This analysis uses an isogenic neuronal cell model to characterize the downstream transcriptional consequences of MBD6 loss, with the goal of identifying disrupted biological pathways and ASD-relevant genetic signals.
 
-**GEO Accession:** [GSE314093](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314093)  
-**Platform:** GPL13497 — Agilent-028004 SurePrint G3 Human GE 8x60K Microarray
+---
+
+## Data Access
+
+| Dataset | Source | Link |
+|---------|--------|------|
+| Microarray expression data | GEO: GSE314093 | [Link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314093) |
+| Platform annotation | GEO: GPL13497 | [Link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL13497) |
+| GTEx v11 Brain Cortex eQTLs | GTEx Portal | [Link](https://gtexportal.org/home/downloads/adult-gtex/qtl) |
+| ASD GWAS associations | GWAS Catalog (MONDO_0005258) | [Link](https://www.ebi.ac.uk/gwas/efotraits/MONDO_0005258) |
 
 ---
 
@@ -56,8 +66,8 @@ MBD6-ASD-transcriptomics/
 │   ├── Figures/                   # All output plots (.png)
 │   └── Tables/                    # All output tables (.csv)
 │
-├── MBD6_ASD_Report.pdf            # Full Report (.pdf)
-│
+├── Report/
+│   └── MBD6_ASD_Report.pdf        # Full Report (.pdf)
 └── 
 ```
 
@@ -86,17 +96,6 @@ install.packages("ggnewscale")
 ```
 01_preprocessing.R → 02_differential_expression.R → 03_GO_enrichment.R → 04_eQTL_GWAS_integration.R
 ```
-
----
-
-## Data Access
-
-| Dataset | Source | Link |
-|---------|--------|------|
-| Microarray expression data | GEO: GSE314093 | [Link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314093) |
-| Platform annotation | GEO: GPL13497 | [Link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL13497) |
-| GTEx v11 Brain Cortex eQTLs | GTEx Portal | [Link](https://gtexportal.org/home/downloads/adult-gtex/qtl) |
-| ASD GWAS associations | GWAS Catalog (MONDO_0005258) | [Link](https://www.ebi.ac.uk/gwas/efotraits/MONDO_0005258) |
 
 ---
 
