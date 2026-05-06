@@ -1,0 +1,297 @@
+---
+title: "Uncovering Patterns in Possum Morphology: A Regression Analysis"
+author: Kim Luong
+format: pdf
+header-includes:
+  - \usepackage{xcolor}
+  - \definecolor{lightred}{rgb}{1.0, 0.4, 0.4}
+  - \usepackage{sectsty}
+  - \sectionfont{\color{red}}
+  - \subsectionfont{\color{lightred}}
+---
+
+# Introduction
+
+The dataset I am analyzing is the `possum` dataset from the `DAAG` package in RStudio. This dataset contains morphometric measurements of 104 mountain brushtail possums (*Trichosurus cunninghami*), which were trapped at seven different sites across Australia, spanning Southern Victoria to Central Queensland. The primary outcome variable is total length ($totlngth$), measured in centimeters, representing the overall body size of the possums. Predictor variables include $site$, a categorical variable indicating the trapping location, skull width ($skullw$), head length ($hdlngth$), and tail length ($taill$), all numeric variables representing specific body measurements in centimeters.
+
+The dataset comprises of 104 observations, each representing a mountain brushtail possum. Observations are also distributed across seven trapping locations through the categorical variable $site$, each contributing a varying number of possums to the dataset. In fact, the number of observations per group is as follows: Cambarville has 33 observations, Bellbird has 13, Whian Whian has 7, Byrangery has 7, Conondale has 13, Allyn River has 13, and Bulburin has 18.
+
+The `possum` dataset is fascinating because it provides detailed morphometric data for a wild population of mountain brushtail possums, enabling the study of geographic and biological factors influencing body size. Exploring how physical traits like head and tail length, or location-specific factors, predict total body length could reveal patterns of adaptation and environmental influences.
+
+\newpage
+
+# Research Questions
+
+## Hypothesis 1: Including site significantly improves the model's ability to predict total body length in possums.
+
+The possums are trapped across seven different locations, and these sites may have distinct environmental factors like climate, vegetation, or food availability that could influence the growth and size of the possums. For example, a site with richer resources might lead to larger individuals. By including site as a predictor variable, I would expect the model to account for these location-specific effects, potentially improving the model’s predictive power.
+
+## Hypothesis 2: Skull width does not significantly contribute to the prediction of total body length.
+
+In many mammals, skull width generally reaches its maximum size after a certain age, as it is largely determined by genetic and developmental factors during the growth phase. Once a possum reaches maturity, the skull stops growing, while the body length may continue to increase depending on other factors such as nutrition or environmental conditions. Therefore, while skull width may be a reflection of early growth and development, it is unlikely to continue influencing total body length in fully grown possums. After reaching adulthood, the size of the skull is fixed, and any further increases in body length are more likely to be due to changes in other parts of the body (like tail or overall trunk length) rather than skull size.
+
+## Hypothesis 3: Head length affects total length depending on the tail length, and vice versa.
+
+Ecological adaptations often shape the relationships between morphological traits like head length and tail length in animals. For species like the mountain brushtail possum, tail length can play a critical role in balance and mobility, especially in environments with complex terrains or arboreal habitats. A longer tail might be an adaptation for navigating these environments, allowing for enhanced agility and stability. This adaptation could modify the relationship between head size and total body length, as animals may need to adjust their overall proportions to maintain biomechanical efficiency. For instance, a possum with a longer tail might develop a smaller or larger head relative to body size to optimize weight distribution, energy efficiency, or predator evasion strategies. Thus, the interaction between head length and tail length may reflect a deeper ecological strategy that balances functional demands with environmental challenges.
+
+\newpage
+
+# Data Exploration
+
+```{r}
+library(DAAG)
+library(GGally)
+
+data(possum)
+possum_data <- possum[, c("site", "skullw", "hdlngth", "taill", "totlngth")]
+possum_data$site <- as.character(possum_data$site)
+
+ggpairs(possum_data, lower = list(combo = "box_no_facet"))
+```
+
+The correlation analysis reveals strong positive relationships between $hdlngth$ and $skullw$ (0.711), $hdlngth$ and $totlngth$ (0.691), and moderately strong correlations between $totlngth$ and $skullw$ (0.526) and $totlngth$ and $taill$ (0.566). In contrast, weaker correlations are observed for $taill$ with $skullw$ (0.256) and $taill$ and $hdlngth$ (0.287).
+
+Overall, the predictor most highly correlated with the outcome variable $totlngth$ is $hdlngth$, with a correlation value of `0.691`. This strong correlation suggests a significant biological link between head length and overall body length, as a longer head generally corresponds to a larger body size. Head length is a key component of an animal's overall morphology, and in many species, there is a proportional relationship between head size and body length due to evolutionary adaptations. The high correlation also reflects the consistency of head length measurements within the dataset, making it a reliable predictor for estimating total body length in possums.
+
+# Multiple Linear Regression Model
+
+```{r}
+possum_lm <- lm(totlngth ~ skullw + hdlngth + taill + site, data = possum_data)
+summary(possum_lm)
+```
+
+## Interpret the estimates of the slopes in the model:
+
+**Intercept:** The estimated coefficient for the intercept is -0.07869, which represents the predicted $totlngth$ for a possum at Cambarville that has a $skullw$, $hdlngth$, and $taill$ of 0 cm. This isn’t a meaningful prediction in practice, as we don’t have possum with no measurement of skull, head, or taill.
+
+**Numerical:**
+
+-   The estimated coefficient for the numerical variable $skullw$ in this model is 0.11606, which means that if we hold the other variables constant, an increase of `1 cm` in $skullw$ is expected to increase the predicted $totlngth$ by `0.11606 cm`.
+
+-   The estimated coefficient for the numerical variable `hdlngth` in this model is 0.42775, which means that if we hold the other variables constant, an increase of `1 cm` in `hdlngth` is expected to increase the predicted $totlngth$ by `0.42775 cm`.
+
+-   The estimated coefficient for the numerical variable `taill` in this model is 1.18372, which means that if we hold the other variables constant, an increase of `1 cm` in `taill` is expected to increase the predicted $totlngth$ by `1.18372 cm`.
+
+**Categorical (`site`):**
+
+-   The estimated coefficient for the categorical variable $site2$ (Bellbird) is `-4.15541`, which means that, holding other variables constant, the predicted `totlngth` for possums at Bellbird is `4.15541 cm` shorter than the predicted $totlngth$ for possums at Cambarville.
+
+-   The estimated coefficient for the categorical variable $site3$ (Whian Whian) is `-3.18972`, which means that, holding other variables constant, the predicted `totlngth` for possums at Whian Whian is `3.18972 cm` shorter than the predicted $totlngth$ for possums at Cambarville.
+
+-   The estimated coefficient for the categorical variable $site4$ (Byrangery) is `-3.60246`, which means that, holding other variables constant, the predicted `totlngth` for possums at Byrangery is `3.60246 cm` shorter than the predicted $totlngth$ for possums at Cambarville."
+
+-   The estimated coefficient for the categorical variable $site5$ (Conondale) is `-3.52435`, which means that, holding other variables constant, the predicted `totlngth` for possums at Conondale is `3.52435 cm` shorter than the predicted $totlngth$ for possums at Cambarville.
+
+-   The estimated coefficient for the categorical variable $site6$ (Allyn River) is `-4.41875`, which means that, holding other variables constant, the predicted `totlngth` for possums at Allyn River is `4.41875 cm` shorter than the predicted $totlngth$ for possums at Cambarville.
+
+-   The estimated coefficient for the categorical variable $site7$ (Bulburin) is `-5.11263`, which means that, holding other variables constant, the predicted `totlngth` for possums at Bulburin is `5.11263 cm` shorter than the predicted $totlngth$ for possums at Cambarville.
+
+## Overall F-test for Model Significance:
+
+-   $H_0$**:** All coefficients of the model are equal to zero.
+-   $H_1$**:** At least one coefficient is not equal to zero.
+-   **Conclusion:** The F-statistic is `45.07` with a p-value of `< 2.2e-16`, which is highly significant. Therefore, we reject the null hypothesis and conclude that at least one of the predictors is significantly related to `totlngth`.
+
+## Multiple R-squared:
+
+The multiple R-squared value of `0.8118` indicates that approximately `81.18%` of the variance in `totlngth` can be explained by the model.
+
+## Residual Standard Error:
+
+```{r}
+summary(possum_data$totlngth)
+1.96/max(possum_data$totlngth)*100
+1.96/min(possum_data$totlngth)*100
+```
+
+The residual standard error of `1.957` indicates that the predictions are, on average, about `1.96 cm` away from the actual `totlngth` values. Considering that `totlngth` ranges from `75` to `96.50` cm, an error of about `1.96 cm` is relatively small in comparison to the total variation in the outcome (2.03-2.61%). This suggests that the model is doing a good job at predicting the `totlngth` of the possums, with a small amount of prediction error relative to the scale of the data.
+
+\newpage
+
+# Improving the Model
+
+## Diagnostics Plots:
+
+```{r}
+# Diagnostic Plots
+library(ggfortify)
+autoplot(possum_lm)
+```
+
+Overall, there is not much evidence that there are any serious violations of any of the assumptions. - The linearity assumption is met as there are no systematic patterns or deviations from zero in the residuals vs fitted plot. - The homoscedasticity or constant variance assumption is met as there are no systematic patterns or deviations from zero in the scale-location plot and the residuals do not display a funnel shape in the residuals vs fitted plot. - The normality assumption is met as the QQ-plot shows that the residuals align closely with the diagonal reference line, indicating that they are approximately normally distributed.
+
+## Transformations:
+
+Because there is not much evidence that there are any serious violations of any of the assumptions, the data does not have to be transformed.
+
+\newpage
+
+## Interaction Effects:
+
+**Hypothesis:** There is an interaction effect between `hdlngth` and `skullw`, where the effect of one predictor on `totlngth` may differ depending on the value of the other predictor.
+
+-   $H_0$: $\beta_{\text{hdlngth:skullw}} = 0$ (The interaction term between `hdlngth` and `skullw` has no effect on `totlngth`.)
+-   $H_1$: $\beta_{\text{hdlngth:skullw}} ≠ 0$ (The interaction term between `hdlngth` and `skullw` has an effect on `totlngth`.)
+
+```{r}
+# Interaction Term Significance
+possum_interaction <- lm(totlngth ~ hdlngth * skullw + taill + site, data = possum_data)
+summary(possum_interaction)
+```
+
+-   **Interaction Term Interpretation:** The effect of $hdlngth$ on $totlngth$ depending on the value of $skullw$, with an interaction term of `-0.02975`, also indicates a weaker negative impact of $hdlngth$ on $totlngth$ when $skullw$ is longer.
+-   **Interaction Term Significance:** However, the p-value of `0.073251` is greater than the typical threshold of 0.05. Thus, we fail to reject the null hypothesis, indicating that there is no statistically significant interaction between `hdlngth` and `skullw` in predicting `totlngth`.
+
+We can also compare this model with the main effects model (without interaction) using the `anova()` function for comparing nested models:
+
+```{r}
+# Model Comparison
+anova(possum_lm, possum_interaction)
+```
+
+-   **Model Comparison:** The ANOVA table comparing `possum_lm` (without the interaction) and `possum_interaction` (with the interaction) shows a p-value of `0.07325`, which is greater than the typical threshold of 0.05, indicating that we fail to reject the null hypothesis. Thus, there is not strong enough evidence to support that the interaction term improves the fit of the regression to the data.
+
+\newpage
+
+# Formal Hypothesis Tests
+
+## Hypothesis 1: Including site significantly improves the model's ability to predict total body length in possums.
+
+-   $H_0$: The reduced model is correct.
+-   $H_1$: The reduced model is not correct.
+
+```{r}
+# Reduced model without the site variable
+reduced_model <- lm(totlngth ~ hdlngth + taill + skullw, data = possum_data)
+# Perform an ANOVA to compare the two models
+anova(reduced_model, possum_lm)
+```
+
+-   **Conclusion:** From the ANOVA results comparing the reduced model without the site variable and the full model that includes the site variable, the p-value for the change in model fit is `2.504e-12`, which is much smaller than the standard significance threshold of 0.05. Thus, we reject the null hypothesis, indicating that the reduce model (inclusion of site) is not correct. Furthermore, the informal hypothesis is supported, which states that the inclusion of site significantly improves the model's ability to predict total length. In other words, this suggests that differences across sites contribute meaningful explanatory power to the model.
+-   **Limitations:** While `site` is a statistically significant predictor in the model, its relationship with `totlngth` may reflect the influence of underlying abiotic factors rather than a direct effect of location. This limitation highlights the need for future studies to incorporate specific environmental variables like temperature, resource availability, or habitat type to better understand the ecological mechanisms driving body size variation in animals.
+
+\newpage
+
+## Hypothesis 2: Skull width doesn't significantly contribute to the prediction of total body length.
+
+-   $H_0$: $\beta_{\text{skullw}} = 0$, given that `hdlngth`, `taill`, and `site` are already included in the model.
+-   $H_1$: $\beta_{\text{skullw}} ≠ 0$, given that `hdlngth`, `taill`, and `site` are already included in the model.
+
+```{r}
+drop1(possum_lm, test="F") 
+```
+
+-   **Conclusion:**
+    -   From the `drop1()` results, the p-value for `skullw` is `0.2129`, which is greater than the standard significance threshold of `0.05`. Thus, we fail to reject the null hypothesis, indicating that $\beta_{\text{skullw}} = 0$, given that `hdlngth`, `taill`, and `site` are included in the model. Furthermore, the informal hypothesis is supported, which states that `skullw` does not significantly contribute to the prediction of total body length after accounting for the effects of head length, tail length, and site.
+    -   One limitation of the analysis is that the model does not account for potential interactions between variables, which could mean that the relationship between skull width and total body length may be significant when considering interactions with other predictors. Additionally, the sample size could influence the statistical power of the test. For instance, a larger sample size may be more likely to detect a subtle effect of skull width if one truly exists.
+
+\newpage
+
+## Hypothesis 3: Head length affects total length depending on the tail length, and vice versa.
+
+-   $H_0$: $\beta_{\text{hdlngth:taill}} = 0$ (The interaction term between `hdlngth` and `taill` has no effect on `totlngth`.)
+-   $H_1$: $\beta_{\text{hdlngth:taill}} ≠ 0$ (The interaction term between `hdlngth` and `taill` has an effect on `totlngth`.)
+
+```{r}
+# Interaction Term Significance
+possum_interaction_hdlngth_taill <- lm(totlngth ~ hdlngth * taill 
+                                       + skullw + site, data = possum_data)
+summary(possum_interaction_hdlngth_taill)
+```
+
+\newpage
+
+-   **Conclusion:**
+    -   The effect of $hdlngth$ on $totlngth$ depending on the value of $taill$, with an interaction term of `-0.04130`, also indicates a weaker negative impact of $hdlngth$ on $totlngth$ when $taill$ is longer.
+    -   However, the p-value of `0.158998` is greater than the typical threshold of `0.05`. Thus, we fail to reject the null hypothesis, indicating that the interaction term between `hdlngth` and `taill` has no effect on `totlngth`. Moreover, the informal hypothesis was not supported, in which head length actually does not affect total length depending on the tail length and vice versa.
+    -   One limitation of the analysis is that the data comes from a specific population of mountain brushtail possums across seven sites in Australia. The conclusions drawn from this sample may not be applicable to other possum populations or species in different environments. The limitations of generalizability mean that the interaction effect observed in this study may not hold true in different ecological contexts, necessitating additional studies to test these findings in other settings.
+
+# Robustness of Results
+
+## Influential Observations:
+
+**According to the the Residuals vs Leverage plot below, the highest influential observation is BR1.**
+
+```{r}
+library(car)
+autoplot(possum_lm, which = c(5))
+```
+
+To test what features of these highly influential observations lead to them having high leverage, the `influencePlot()` function is utilized.
+
+```{r}
+influencePlot(possum_lm)
+```
+
+-   According to the `influencePlot()`, we see that possum BR1 is the worst case scenario from an influence perspective as it has the most extreme value or outlying in the dependent variable (`totlgnth`) and it influences the other observations (the circle is big, indicating a big $D_i$). However, possum BR1 is not outlying in the independent variables as $h_i$ is not the most extreme value for the independent variables.
+
+**To test what influence does deleting the BR1 observation have on my results, the `dfbetas()` function can be used.**
+
+```{r}
+possum_dfbetas <- dfbetas(possum_lm)
+threshold <- 3 / sqrt(nrow(possum_data))
+subset(possum_data, abs(possum_dfbetas[,"taill"]) > threshold)
+subset(possum_data, abs(possum_dfbetas[,"site4"]) > threshold)
+```
+
+-   Using the `dfbetas()` function, we examined how the removal of specific observations, particularly BR1, influences the coefficients of the regression model. The results indicate that BR1 has substantial influence on the estimation of coefficients associated with both `taill` and `site4` (Conondale), as evidenced by the large absolute values of its `dfbetas` exceeding the threshold.
+
+\newpage
+
+## Multicolinearity:
+
+```{r}
+library(car)
+vif(possum_lm)
+```
+
+The Variance Inflation Factors (VIFs) for the predictors in the fitted model suggest that multicollinearity is not a serious issue. All VIFs are below 5, indicating that the predictor variables are not highly correlated with each other. Specifically, the VIFs for `skullw` (`2.23`), `hdlngth` (`2.46`), `taill` (`1.65`), and `site` (`2.67`) suggest moderate correlation, but none of them show values that would raise concerns. Overall, the results suggest that the predictors in the model can be interpreted independently without significant distortion from multicollinearity.
+
+## LOO Prediction Error and Overfitting:
+
+```{r}
+press(possum_lm) #PRESS
+sum((possum_lm$residuals)^2) #SSE
+```
+
+-   After utilizing cross-validation with press(), the Leave-One-Out prediction error is 445.2906.
+
+-   The comparison between SSE (360.0895) and PRESS (445.2906) suggests evidence of overfitting in the model. While the SSE is relatively low, indicating a good fit to the training data, the higher PRESS value indicates that the model performs worse when predicting unseen data. This discrepancy suggests that the model may have been too closely fitted to the training data, capturing noise rather than the underlying patterns. Therefore, the model appears to be overfit, and steps such as simplifying the model or using regularization may help improve its generalization.
+
+# Automatic Selection
+
+```{r}
+possum_step <- step(possum_lm, direction = "backward")
+```
+
+-   The final model selected by backward selection removes the variable `skullw` from the regression.
+-   The limitations of automatic model selection generally arise from two key issues.
+    -   First, it can overlook the need to control for specific variables that are important to the research question, regardless of whether they improve the model's predictive performance. Typically, variables should be included in a model due to their theoretical or conceptual considerations. However, automatic selection often ignore these crucial factors are just base consideration off of statistical significance.
+
+    -   Second, relying on algorithms for model selection can lead to improper inference, as analysts may fail to account for the model selection process itself when interpreting the results. This failure to account for model selection can inflate p-values, leading to misleading conclusions about the statistical significance of the predictors in the final model. In essence, the p-values may appear smaller than they should be, thereby falsely suggesting stronger evidence for certain variables.
+
+# Conclusions
+
+## Learning/Experiences:
+
+Engaging with the possum dataset and performing the regression analysis has provided valuable insights into both the process of data analysis and the nuances of statistical modeling. Throughout this project, I explored how different variables, such as `skullw`, `hdlngth`, `taill`, and `site`, contribute to explaining the `total length` of mountain brushtail possums. The steps taken included data preparation, multiple linear regression, diagnostic plots, influence plots analysis, and model selection. Throughout the process, I also became more familiar with newer statistical methods, such as influential analysis, VIF for multicolinearity, and SSE and PRESS for model performance evaluation. I gained a deeper understanding of how model selection works and the potential limitations of relying solely on automated selection methods.
+
+## Conclusions of Interest:
+
+Several conclusions stood out during this analysis, with the most interesting being the influential observation analysis and the evidence of overfitting.
+
+-   The BR1 possum was identified as the most influential observation, significantly affecting the regression model. While it was outlying in the dependent variable (total length), it was not extreme in the independent variables, highlighting the importance of examining influential data points in regression analysis. Removing BR1 (in the dfbetas() function) led to changes in coefficients for variables such as taill and site4, indicating that its presence notably influenced the model.
+-   Diagnostic plots suggested that the model fit was generally good, but slight deviations were noted in the direction of BR1. These deviations weren't significant enough to invalidate the model, but they served as a reminder of how influential observations can subtly affect results.
+-   The evidence of overfitting suggests that further refinement of the model is necessary to enhance its predictive accuracy for new data. This is an important consideration when developing models for ecological or biological data, where the goal is often to generalize findings to broader populations.
+
+\newpage
+
+## Future Avenues of Research:
+
+-   Despite being excluded in the automatic selection process, skullw could still be biologically relevant in understanding the morphology of the possums. Future research could focus on whether skull width has a more complex or non-linear relationship with total length or other physiological features, potentially using non-parametric methods or interaction terms.
+
+-   The current analysis focused on morphometric measurements and site location, but other ecological variables, such as diet, habitat types, or climate conditions, could contribute valuable insights into the factors affecting the possum's size and morphology. Future research could incorporate a broader set of ecological variables and test their combined effect on total length.
+
+-   The findings could be expanded to other species to understand whether similar factors, such as site and morphology, can influence their size or growth patterns. Comparative studies could explore how habitat, climate, and genetic diversity contribute to size differences across species or populations.
+
+By exploring these avenues, future research could deepen our understanding of the ecological and biological factors driving size variation in possums and other species.
