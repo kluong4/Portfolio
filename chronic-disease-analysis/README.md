@@ -41,7 +41,7 @@ This project examines patterns in chronic disease prevalence and Medicare utiliz
 ### Objective 1: Chronic Disease Prevalence
 **Visualization:** Faceted heatmap — prevalence by race/ethnicity and age group, paneled by geography
 
-![Fig1_Heatmap](/chronic-disease-analysis/Results/Fig1_Heatmap_Race-Age.png)
+![Fig1_Heatmap](/chronic-disease-analysis/Results/Fig1_FacetedHeatmap_Race-Age.png)
 
 - Hypertension and Hyperlipidemia are consistently the highest-prevalence conditions in the 65+ group across all geographies, with non-Hispanic Black beneficiaries showing a disproportionately high cardiovascular disease burden.
 - In the <65 population, Drug/Substance Abuse, HIV/AIDS, and Schizophrenia show relatively elevated prevalence compared to the 65+ panels, reflecting conditions that disproportionately affect younger Medicare beneficiaries.
@@ -72,6 +72,7 @@ This project examines patterns in chronic disease prevalence and Medicare utiliz
 **Visualization:** Diverging bar charts — per-condition deviation from national baseline, stratified by gender and race/ethnicity
 
 ![Fig3_Gender](/chronic-disease-analysis/Results/Fig3_DivergingBarChart_Gender.png)
+
 ![Fig3_Race](/chronic-disease-analysis/Results/Fig4_DivergingBarChart_Race.png)
 
 - For most conditions, male and female beneficiaries show consistent geographic deviation patterns, suggesting that state-level differences in chronic disease burden are generally not driven by one sex.
