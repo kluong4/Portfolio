@@ -125,4 +125,5 @@ install.packages(c("stringr", "tidyr", "dplyr", "ggplot2", "readxl", "data.table
 ## Course Context
 
 **Course:** BMI 5330: Introduction to Bioinformatics
-The University of Texas Health Science Center at Houston, Fall 2025
+The University of Texas Health Science Center at Houston
+Fall 2025
