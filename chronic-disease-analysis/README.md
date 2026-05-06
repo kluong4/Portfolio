@@ -41,7 +41,7 @@ This project examines patterns in chronic disease prevalence and Medicare utiliz
 ### Objective 1: Chronic Disease Prevalence
 **Visualization:** Faceted heatmap — prevalence by race/ethnicity and age group, paneled by geography
 
-(/chronic-disease-analysis/Results/Fig1_Heatmap_Race-Age.png)
+![Fig1_Heatmap](/chronic-disease-analysis/Results/Fig1_Heatmap_Race-Age.png)
 
 - Hypertension and Hyperlipidemia are consistently the highest-prevalence conditions in the 65+ group across all geographies, with non-Hispanic Black beneficiaries showing a disproportionately high cardiovascular disease burden.
 - In the <65 population, Drug/Substance Abuse, HIV/AIDS, and Schizophrenia show relatively elevated prevalence compared to the 65+ panels, reflecting conditions that disproportionately affect younger Medicare beneficiaries.
@@ -52,7 +52,7 @@ This project examines patterns in chronic disease prevalence and Medicare utiliz
 ### Objective 2: Medicare Utilization Analysis
 **Visualization:** Grouped bar charts — four utilization metrics by condition and geography (National vs. TX, CA, NY, FL)
 
-(/chronic-disease-analysis/Results/Fig2_BarChart_UtilizationMetrics.png)
+![Fig2_BarChart](/chronic-disease-analysis/Results/Fig2_BarChart_UtilizationMetrics.png)
 
 **Spending:**
 - Stroke and Heart Failure are the highest-cost conditions under standardized per capita spending; California and New York show elevated actual spending, reflecting regional cost differences that are adjusted away in the standardized metric.
@@ -71,8 +71,8 @@ This project examines patterns in chronic disease prevalence and Medicare utiliz
 ### Objective 3: State-Wise Prevalence Analysis
 **Visualization:** Diverging bar charts — per-condition deviation from national baseline, stratified by gender and race/ethnicity
 
-(/chronic-disease-analysis/Results/Fig3_DivergingBarChart_Gender.png)
-(/chronic-disease-analysis/Results/Fig4_DivergingBarChart_Race.png)
+![Fig3_Gender](/chronic-disease-analysis/Results/Fig3_DivergingBarChart_Gender.png)
+![Fig3_Race](/chronic-disease-analysis/Results/Fig4_DivergingBarChart_Race.png)
 
 - For most conditions, male and female beneficiaries show consistent geographic deviation patterns, suggesting that state-level differences in chronic disease burden are generally not driven by one sex.
   - Exceptions: Depression and Osteoporosis show larger female deviations in high-prevalence states; HIV/AIDS shows a substantially larger male deviation in Washington D.C.
