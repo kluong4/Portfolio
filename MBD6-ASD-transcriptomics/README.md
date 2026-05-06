@@ -27,9 +27,16 @@ MBD6 (Methyl-CpG Binding Domain Protein 6) is a chromatin regulator implicated i
 
 ## Key Results
 - **913 DEGs** identified between MBD6-heterozygous and isogenic control cells (637 upregulated, 276 downregulated; FDR < 0.05, |log2FC| > 1)
-- **Top dysregulated pathways:** immune activation, ERK/MAPK signaling, and stress-activated kinase signaling (GO Biological Process enrichment)
-- **22 DEGs** harbored eQTLs overlapping ASD GWAS variants within ±500kb, including mitochondrial-linked genes **NDUFB4**, **GFM1**, and **SRGAP3**, linking MBD6 haploinsufficiency to known ASD genetic architecture
+    ![Fig5_VolcanoPlot](/MBD6-ASD-transcriptomics/Results/Figures/Fig5_VolcanoPlot.png)
 
+    ![Fig6_DEG_Heatmap](/MBD6-ASD-transcriptomics/Results/Figures/Fig6_DEG_Heatmap.png)
+  
+- **Top dysregulated pathways:** immune activation, ERK/MAPK signaling, and stress-activated kinase signaling (GO Biological Process enrichment)
+    ![Fig8_cnetplot](/MBD6-ASD-transcriptomics/Results/Figures/Fig8_GO_BP_cnetplot.png)
+  
+- **22 DEGs** harbored eQTLs overlapping ASD GWAS variants within ±500kb, including mitochondrial-linked genes **NDUFB4**, **GFM1**, and **SRGAP3**, linking MBD6 haploinsufficiency to known ASD genetic architecture
+    ![Fig9_eQTL_GWAS_overlap](/MBD6-ASD-transcriptomics/Results/Figures/Fig9_eQTL_GWAS_overlap.png)
+  
 ---
 
 ## Repository Structure
