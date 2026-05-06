@@ -12,6 +12,8 @@ SLC30A8 encodes the zinc transporter ZnT8, which plays a central role in insulin
 2. **Evolutionary conservation** of SLC30A8 variants using PhyloP 100-way vertebrate scores
 3. **Population-level gene expression variation** among T2D-associated GWAS genes using RNA-seq data
 
+[Presentation [link](https://youtu.be/jSczN4W8rAA)]
+
 ---
 
 ## Methods & Tools
@@ -33,8 +35,7 @@ SLC30A8 encodes the zinc transporter ZnT8, which plays a central role in insulin
 - PhyloP analysis identified **8 peaks of high evolutionary conservation**, predominantly in exonic regions, with **15 highly conserved variants** (PhyloP > 2.27) flagged for potential regulatory significance.
     ![Fig2_ConservationPlot](Results/Fig2_ConservationPlot.png)
   
-- Among 200+ T2D-associated GWAS genes, SLC30A8 ranked **101st in population-level expression variance** (variance = 0.076), indicating highly stable expression across populations — further supporting strong regulatory constraint.
-  - [Table2_Top_T2D_Genes_Population_Expression_Variation](Results/Top_T2D_Genes_Population_Expression_Variation.tsv)
+- Among 200+ T2D-associated GWAS genes, SLC30A8 ranked **101st in population-level expression variance** (variance = 0.076), indicating highly stable expression across populations — further supporting strong regulatory constraint.([Table2_Top_T2D_Genes_Population_Expression_Variation](Results/Top_T2D_Genes_Population_Expression_Variation.tsv))
 
 ---
 
@@ -66,21 +67,6 @@ SLC30A8-T2D-analysis/
 │   └── SLC30A8_T2D_Report.pdf
 │
 └──
-```
-
----
-
-## How to Run
-
-```bash
-# Step 1: Run the Bash pipeline (downloads data + extracts variants)
-chmod +x scripts/01_extract_SLC30A8_variants.sh
-./scripts/01_extract_SLC30A8_variants.sh
-
-# Step 2–4: Run R scripts in order
-Rscript scripts/02_population_variation.R
-Rscript scripts/03_evolutionary_conservation.R
-Rscript scripts/04_expression_variation.R
 ```
 
 ---
@@ -123,7 +109,8 @@ install.packages(c("stringr", "tidyr", "dplyr", "ggplot2", "readxl", "data.table
 ---
 
 ## Course Context
+**BMI 5330:** Introduction to Bioinformatics
 
-**Course:** BMI 5330: Introduction to Bioinformatics
 The University of Texas Health Science Center at Houston
+
 Fall 2025
