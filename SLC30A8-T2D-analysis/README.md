@@ -14,6 +14,17 @@ SLC30A8 encodes the zinc transporter ZnT8, which plays a central role in insulin
 
 ---
 
+## Methods & Tools
+
+| Script | Analysis | Tools |
+|--------|----------|-------|
+| `01_extract_SLC30A8_variants.sh` | VCF download, variant extraction (chr8: 117,134,995–117,176,714), BED file generation, exon/intron classification, expression matrix header parsing | Bash/Shell, `wget`, `awk`, `gzip`, `sed`, `bedtools` |
+| `02_population_variation.R` | Allele frequency extraction from INFO field, population-stratified summary statistics, boxplot visualization | R, `stringr`, `tidyr`, `dplyr`, `ggplot2` |
+| `03_evolutionary_conservation.R` | PhyloP score join, high-conservation filtering (PhyloP > 2.27), exon structure overlay, conservation plot | R, `data.table`, `dplyr`, `ggplot2` |
+| `04_expression_variation.R` | GEUVADIS FPKM matrix processing, per-population mean expression, log2 transformation, GWAS gene filtering, variance ranking, expression boxplots | R, `readxl`, `tidyr`, `dplyr`, `ggplot2` |
+
+---
+
 ## Key Findings
 
 - SLC30A8 variants are **globally rare and non-population-specific**, with average allele frequencies ranging from 0.071 (AFR) to 0.112 (EUR), consistent with strong purifying selection on a gene essential to insulin secretion.
@@ -24,17 +35,6 @@ SLC30A8 encodes the zinc transporter ZnT8, which plays a central role in insulin
   
 - Among 200+ T2D-associated GWAS genes, SLC30A8 ranked **101st in population-level expression variance** (variance = 0.076), indicating highly stable expression across populations — further supporting strong regulatory constraint.
   - [Table2_Top_T2D_Genes_Population_Expression_Variation](Results/Top_T2D_Genes_Population_Expression_Variation.tsv)
-
----
-
-## Methods & Tools
-
-| Script | Analysis | Tools |
-|--------|----------|-------|
-| `01_extract_SLC30A8_variants.sh` | VCF download, variant extraction (chr8: 117,134,995–117,176,714), BED file generation, exon/intron classification, expression matrix header parsing | Bash/Shell, `wget`, `awk`, `gzip`, `sed`, `bedtools` |
-| `02_population_variation.R` | Allele frequency extraction from INFO field, population-stratified summary statistics, boxplot visualization | R, `stringr`, `tidyr`, `dplyr`, `ggplot2` |
-| `03_evolutionary_conservation.R` | PhyloP score join, high-conservation filtering (PhyloP > 2.27), exon structure overlay, conservation plot | R, `data.table`, `dplyr`, `ggplot2` |
-| `04_expression_variation.R` | GEUVADIS FPKM matrix processing, per-population mean expression, log2 transformation, GWAS gene filtering, variance ranking, expression boxplots | R, `readxl`, `tidyr`, `dplyr`, `ggplot2` |
 
 ---
 
