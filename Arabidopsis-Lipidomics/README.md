@@ -14,16 +14,6 @@ Findings were presented as a research poster at the Freshman Research Initiative
 
 ---
 
-## Key Findings
-
-- Copper-stressed plants (*Experimental C*) showed a **57% reduction in average root length** compared to controls (3 cm vs. 7 cm), measured at Day 12 post-germination.
-- Stressed plants exhibited **lighter pigmentation** and **reduced overall biomass** relative to controls, consistent with chlorophyll degradation and disrupted photosynthesis under copper toxicity.
-- Morphological changes align with published evidence of lipid peroxidation in copper-stressed plants, particularly degradation of galactolipids (MGDG, DGDG) and anionic lipids (SQDG, PG) critical to thylakoid membrane function.
-- Lipid extraction was successfully completed using MTBE/MeOH phase separation; LC-MS profiling remains a planned future direction.
-
-![Poster](BioP_FRI_FinalPoster.png)
----
-
 ## Experimental Design
 
 | Parameter | Control Group | Experimental Group |
@@ -37,7 +27,7 @@ Findings were presented as a research poster at the Freshman Research Initiative
 
 ---
 
-## Methods
+## Methods (Fig 1)
 
 | Step | Description |
 |------|-------------|
@@ -50,10 +40,21 @@ Findings were presented as a research poster at the Freshman Research Initiative
 
 ---
 
+## Key Findings
+
+- Stressed plants exhibited **lighter pigmentation** and **reduced overall biomass** relative to controls, consistent with chlorophyll degradation and disrupted photosynthesis under copper toxicity (Fig 2).
+- Copper-stressed plants (*Experimental C*) showed a **57% reduction in average root length** compared to controls (3 cm vs. 7 cm), measured at Day 12 post-germination (Fig 3).
+- Morphological changes align with published evidence of lipid peroxidation in copper-stressed plants, particularly degradation of galactolipids (MGDG, DGDG) and anionic lipids (SQDG, PG) critical to thylakoid membrane function.
+- Lipid extraction was successfully completed using MTBE/MeOH phase separation; LC-MS profiling remains a planned future direction.
+
+![Poster](BioP_FRI_FinalPoster.png)
+
+---
+
 ## Repository Structure
 
 ```
-[repo-name]/
+Arabidopsis-Lipidomics/
 │
 ├── README.md
 │
@@ -82,7 +83,8 @@ Findings were presented as a research poster at the Freshman Research Initiative
 ---
 
 ## Course Context
-
 **Program:** Freshman Research Initiative (FRI), Stream: BioP
+
 **Institution:** College of Natural Sciences, The University of Texas at Austin
+
 **Presented:** Research Poster, Fall 2022
