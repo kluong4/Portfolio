@@ -1,0 +1,3 @@
+Population,Samples_before_QC,Samples_after_QC,SNPs_before_QC,SNPs_EUR_pass,SNPs_SAS_pass,SNPs_both_pass
+EUR,503,503,1664852,1490291,1458845,1422958
+SAS,484,484,1664852,1490291,1458845,1422958
